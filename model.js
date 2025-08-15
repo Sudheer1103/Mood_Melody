@@ -8,7 +8,7 @@ const state = {
 };
 
 // IMPORTANT: Replace this with your actual YouTube API key
-const YOUTUBE_API_KEY = '';
+const YOUTUBE_API_KEY = 'AIzaSyAb5CwHSk1Rd161tKcGjPdG1-v0UqzNGQM';
 
 /**
  * Fetches a playlist from YouTube based on language and mood.
