@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Playlist Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Mood Melody</h1>
+            <p>Select your language and current mood, and we'll curate the perfect playlist.</p>
+            <!-- Language Selector -->
+            <div class="language-selector-wrapper">
+                <label for="language-select">Language:</label>
+                <select id="language-select" class="language-select">
+                    <option value="english">English</option>
+                    <option value="hindi">Hindi</option>
+                    <option value="telugu">Telugu</option>
+                    <option value="spanish">Spanish</option>
+                </select>
+            </div>
+        </header>
+
+        <main>
+            <section class="mood-selector">
+                <div class="mood-card" data-mood="happy">
+                    <div class="emoji">😄</div>
+                    <h3>Happy</h3>
+                </div>
+                <div class="mood-card" data-mood="sad">
+                    <div class="emoji">😢</div>
+                    <h3>Sad</h3>
+                </div>
+                <div class="mood-card" data-mood="energetic">
+                    <div class="emoji">⚡️</div>
+                    <h3>Energetic</h3>
+                </div>
+                <div class="mood-card" data-mood="chill">
+                    <div class="emoji">😌</div>
+                    <h3>Chill</h3>
+                </div>
+                <div class="mood-card" data-mood="romantic">
+                    <div class="emoji">❤️</div>
+                    <h3>Romantic</h3>
+                </div>
+                <div class="mood-card" data-mood="workout">
+                    <div class="emoji">💪</div>
+                    <h3>Workout</h3>
+                </div>
+            </section>
+
+            <section class="playlist-container">
+                <h2 id="playlist-title">Your Playlist</h2>
+                <ul class="playlist">
+                    <!-- Songs will be injected here by JavaScript -->
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>

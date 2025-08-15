@@ -1,0 +1,258 @@
+/* General Styles & Variables */
+:root {
+    --bg-color: #121212;
+    --card-color: #1e1e1e;
+    --primary-text: #ffffff;
+    --secondary-text: #b3b3b3;
+    --accent-color: #1db954;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --border-radius: 12px;
+    --transition-speed: 0.5s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    transition: background var(--transition-speed) ease-in-out;
+    line-height: 1.6;
+}
+
+/* Gradient Backgrounds */
+body.happy-bg {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+}
+body.sad-bg {
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+}
+body.energetic-bg {
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+}
+body.chill-bg {
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+}
+body.romantic-bg {
+    background: linear-gradient(135deg, #f78ca0 0%, #f9748f 50%, #fd868c 100%);
+}
+body.workout-bg {
+    background: linear-gradient(135deg, #a71d31 0%, #3f0d12 100%);
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* Header */
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Mood Selection Section */
+.mood-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.mood-card {
+    background-color: var(--card-color);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.mood-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.mood-card .emoji {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.mood-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Playlist Display Section */
+.playlist-container {
+    background-color: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none; /* Initially hidden */
+}
+
+.playlist-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.playlist {
+    list-style: none;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.song-item:last-child {
+    border-bottom: none;
+}
+
+.song-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.song-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary-text);
+    width: 100%;
+}
+
+.song-number {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    width: 40px;
+    text-align: center;
+}
+
+.song-details {
+    flex-grow: 1;
+    margin-left: 1rem;
+}
+
+.song-details .title {
+    font-weight: 600;
+}
+
+.song-details .artist {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .mood-selector {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+    .container {
+        padding: 1.5rem 1rem;
+    }
+    .playlist-container {
+        padding: 1.5rem;
+    }
+}
+/* --- Add these styles to your existing style.css file --- */
+
+/* Loading Spinner Animation */
+.loader {
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top: 5px solid var(--accent-color);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+    margin: 2rem auto; /* Center the spinner */
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error Message Styling */
+.error-message {
+    text-align: center;
+    color: #ff9a9e;
+    font-weight: 600;
+}
+/* --- Add these styles to your existing style.css file --- */
+
+/* Language Selector */
+.language-selector-wrapper {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.language-selector-wrapper label {
+    font-size: 1rem;
+    color: var(--secondary-text);
+}
+
+.language-select {
+    background-color: var(--card-color);
+    color: var(--primary-text);
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.language-select:hover,
+.language-select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
