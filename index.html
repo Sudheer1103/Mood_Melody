@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mood Playlist Generator</title>
+    <title>Mood Melody - Modern UI</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to the stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
-        <header>
+        <header class="app-header">
             <h1>Mood Melody</h1>
-            <p>Select your language and current mood, and we'll curate the perfect playlist.</p>
+            <p>Select your language and mood to get the perfect playlist.</p>
+            
             <!-- Language Selector -->
             <div class="language-selector-wrapper">
                 <label for="language-select">Language:</label>
                 <select id="language-select" class="language-select">
                     <option value="english">English</option>
                     <option value="hindi">Hindi</option>
-                    <option value="telugu">Telugu</option>
                     <option value="spanish">Spanish</option>
                 </select>
             </div>
@@ -62,6 +68,7 @@
         </main>
     </div>
 
+    <!-- Main JavaScript entry point -->
     <script type="module" src="script.js"></script>
 
 </body>

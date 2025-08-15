@@ -1,13 +1,24 @@
-/* General Styles & Variables */
+/* --- Modern UI/UX Revamp for Mood Melody --- */
+
+/* 1. Global Styles & Variables
+-------------------------------------------------- */
 :root {
-    --bg-color: #121212;
-    --card-color: #1e1e1e;
+    --font-family: 'Poppins', sans-serif;
+    
+    /* Color Palette (Default/Dark Theme) */
     --primary-text: #ffffff;
     --secondary-text: #b3b3b3;
     --accent-color: #1db954;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --border-radius: 12px;
-    --transition-speed: 0.5s;
+    --text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+
+    /* Sizing & Spacing */
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+
+    /* Transitions */
+    --transition-smooth: all 0.3s ease-in-out;
 }
 
 * {
@@ -17,158 +28,247 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
+    font-family: var(--font-family);
+    background-color: #121212; /* Fallback color */
     color: var(--primary-text);
-    transition: background var(--transition-speed) ease-in-out;
     line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+    transition: color 0.5s ease-in-out;
 }
 
-/* Gradient Backgrounds */
+/* 2. Interactive Image Backgrounds & Animation
+-------------------------------------------------- */
+@keyframes kenburns-flow {
+    0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+    50% { transform: scale(1.15) translate(-2%, 2%); opacity: 1; }
+    100% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* --- UPDATED DEFAULT IMAGE --- */
+    background-image: url('https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    animation: kenburns-flow 30s ease-in-out infinite;
+    transition: background-image 1s ease-in-out;
+}
+
+/* 3. Dynamic Color Themes per Mood
+-------------------------------------------------- */
 body.happy-bg {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    --primary-text: #1a1a1a;
+    --secondary-text: #4d4d4d;
+    --accent-color: #ff5f6d;
+    --text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
 }
 body.sad-bg {
-    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    --primary-text: #e0e0e0;
+    --secondary-text: #a0a0a0;
+    --accent-color: #80d0c7;
 }
 body.energetic-bg {
-    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    --primary-text: #ffffff;
+    --secondary-text: #f2f2f2;
+    --accent-color: #ffcc00;
 }
 body.chill-bg {
-    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    --primary-text: #ffffff;
+    --secondary-text: #e6e6e6;
+    --accent-color: #ffc371;
 }
 body.romantic-bg {
-    background: linear-gradient(135deg, #f78ca0 0%, #f9748f 50%, #fd868c 100%);
+    --primary-text: #ffffff;
+    --secondary-text: #fde2e4;
+    --accent-color: #ff758c;
 }
 body.workout-bg {
-    background: linear-gradient(135deg, #a71d31 0%, #3f0d12 100%);
+    --primary-text: #ffffff;
+    --secondary-text: #f0f0f0;
+    --accent-color: #ff4b2b;
 }
 
-/* Main Container */
+/* --- ALL IMAGE LINKS BELOW HAVE BEEN REPLACED WITH NEW, RELIABLE ONES --- */
+/* --- UPDATED HAPPY, SAD, AND CHILL IMAGES --- */
+body.happy-bg::before { background-image: url('https://images.unsplash.com/photo-1509909756405-be0199881695?q=80&w=2070&auto-format&fit=crop'); }
+body.sad-bg::before { background-image: url('https://images.unsplash.com/photo-1534278931739-31a839a35b1e?q=80&w=1974&auto-format&fit=crop'); }
+body.chill-bg::before { background-image: url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?q=80&w=2070&auto-format&fit=crop'); }
+body.romantic-bg::before { background-image: url('https://images.pexels.com/photos/1024984/pexels-photo-1024984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+body.energetic-bg::before { background-image: url('https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+body.workout-bg::before { background-image: url('https://images.pexels.com/photos/2261477/pexels-photo-2261477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+
+/* 4. Main Layout & Header
+-------------------------------------------------- */
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem var(--spacing-lg);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    position: relative;
+    z-index: 1;
 }
 
-/* Header */
-header {
+.app-header {
     text-align: center;
+    margin-bottom: 3rem;
 }
 
-header h1 {
-    font-size: 2.5rem;
+.app-header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: 0.5rem;
+    text-shadow: var(--text-shadow);
 }
 
-header p {
+.app-header p {
     font-size: 1.1rem;
     color: var(--secondary-text);
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
+    text-shadow: var(--text-shadow);
 }
 
-/* Mood Selection Section */
+/* 5. Language Selector
+-------------------------------------------------- */
+.language-selector-wrapper {
+    margin-top: var(--spacing-lg);
+}
+
+.language-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--primary-text);
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.language-select:hover {
+    border-color: var(--accent-color);
+}
+
+/* 6. Mood Selector Cards
+-------------------------------------------------- */
 .mood-selector {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-lg);
 }
 
 .mood-card {
-    background-color: var(--card-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
+    background: rgba(30, 30, 30, 0.5);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .mood-card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 25px var(--shadow-color);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent-color);
 }
 
 .mood-card .emoji {
-    font-size: 3rem;
+    font-size: 3.5rem;
     line-height: 1;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .mood-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
+    color: var(--primary-text);
 }
 
-/* Playlist Display Section */
+/* 7. Playlist Display
+-------------------------------------------------- */
 .playlist-container {
-    background-color: rgba(30, 30, 30, 0.7);
+    margin-top: 3rem;
+    background: rgba(30, 30, 30, 0.5);
     backdrop-filter: blur(10px);
     padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 15px var(--shadow-color);
+    border-radius: var(--border-radius-lg);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    display: none; /* Initially hidden */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .playlist-container h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--accent-color);
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-lg);
     padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
     display: inline-block;
+    color: var(--primary-text);
 }
 
 .playlist {
     list-style: none;
-}
-
-.song-item {
     display: flex;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s ease;
+    flex-direction: column;
+    gap: var(--spacing-md);
 }
 
-.song-item:last-child {
-    border-bottom: none;
+/* 8. Song Item Cards
+-------------------------------------------------- */
+.song-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-md);
+    transition: var(--transition-smooth);
 }
 
 .song-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
 }
 
 .song-item a {
     display: flex;
     align-items: center;
+    padding: var(--spacing-md);
     text-decoration: none;
     color: var(--primary-text);
-    width: 100%;
 }
 
 .song-number {
     font-size: 1rem;
     color: var(--secondary-text);
-    width: 40px;
-    text-align: center;
+    width: 30px;
+    flex-shrink: 0;
 }
 
 .song-details {
     flex-grow: 1;
-    margin-left: 1rem;
+    margin: 0 var(--spacing-md);
 }
 
 .song-details .title {
     font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .song-details .artist {
@@ -176,40 +276,16 @@ header p {
     font-size: 0.9rem;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-    .mood-selector {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 1rem;
-    }
-    .container {
-        padding: 1.5rem 1rem;
-    }
-    .playlist-container {
-        padding: 1.5rem;
-    }
-}
-/* --- Add these styles to your existing style.css file --- */
-
-/* Loading Spinner Animation */
+/* 9. Loading Spinner & Error States
+-------------------------------------------------- */
 .loader {
-    border: 5px solid rgba(255, 255, 255, 0.2);
+    border: 4px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    border-top: 5px solid var(--accent-color);
-    width: 50px;
-    height: 50px;
-    -webkit-animation: spin 1s linear infinite; /* Safari */
+    border-top: 4px solid var(--accent-color);
+    width: 40px;
+    height: 40px;
     animation: spin 1s linear infinite;
-    margin: 2rem auto; /* Center the spinner */
-}
-
-/* Safari */
-@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    margin: 2rem auto;
 }
 
 @keyframes spin {
@@ -217,42 +293,25 @@ header p {
     100% { transform: rotate(360deg); }
 }
 
-/* Error Message Styling */
 .error-message {
     text-align: center;
-    color: #ff9a9e;
+    color: #ff758c;
     font-weight: 600;
-}
-/* --- Add these styles to your existing style.css file --- */
-
-/* Language Selector */
-.language-selector-wrapper {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
+    padding: var(--spacing-lg);
 }
 
-.language-selector-wrapper label {
-    font-size: 1rem;
-    color: var(--secondary-text);
-}
+/* 10. Responsive Design
+-------------------------------------------------- */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem var(--spacing-md);
+    }
+    
+    .mood-selector {
+        gap: var(--spacing-md);
+    }
 
-.language-select {
-    background-color: var(--card-color);
-    color: var(--primary-text);
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
-}
-
-.language-select:hover,
-.language-select:focus {
-    border-color: var(--accent-color);
-    outline: none;
+    .playlist-container {
+        padding: 1.5rem;
+    }
 }

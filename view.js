@@ -14,7 +14,7 @@ const elements = {
     playlistContainer: document.querySelector('.playlist-container'),
     playlistTitle: document.getElementById('playlist-title'),
     playlistList: document.querySelector('.playlist'),
-    languageSelect: document.getElementById('language-select') // New element
+    languageSelect: document.getElementById('language-select')
 };
 
 function createSpinner() {
@@ -47,7 +47,7 @@ function renderPlaylist(playlist, mood) {
     elements.playlistContainer.style.display = 'block';
     elements.playlistTitle.textContent = uiStrings.playlistTitle(capitalizedMood, lang);
 
-    if (playlist.length === 0) {
+    if (!playlist || playlist.length === 0) {
         elements.playlistList.innerHTML = `<li>${uiStrings.noSongsFound}</li>`;
         return;
     }
@@ -76,7 +76,7 @@ function addMoodSelectionHandler(handler) {
     elements.moodCards.forEach(card => {
         card.addEventListener('click', () => {
             const mood = card.dataset.mood;
-            const language = elements.languageSelect.value; // Get current language
+            const language = elements.languageSelect.value;
             handler(language, mood);
         });
     });

@@ -1,0 +1,5 @@
+# Ignore the configuration file containing the secret API key
+config.js
+
+# Ignore Node.js modules if you ever add a build step
+node_modules/
