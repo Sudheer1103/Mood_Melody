@@ -1,8 +1,8 @@
 // --- MODEL (model.js) ---
 // Manages the application's data by fetching from the YouTube API, with a local fallback.
 
-// Import the API key from the secure config file
-import { YOUTUBE_API_KEY } from './config.js';
+// The API key is now read from the Vercel environment variable.
+const YOUTUBE_API_KEY = import.meta.env.YOUR_API_KEY_HERE;
 
 const state = {
     currentMood: null,
@@ -11,6 +11,7 @@ const state = {
 };
 
 // --- Fallback Data ---
+// This local database is used if the YouTube API quota is exceeded.
 const localSongDatabase = {
     english: {
         happy: [
@@ -82,6 +83,11 @@ const localSongDatabase = {
     }
 };
 
+/**
+ * Loads a playlist from the local fallback database.
+ * @param {string} language - The selected language.
+ * @param {string} mood - The selected mood.
+ */
 function loadFromFallback(language, mood) {
     console.warn("Loading playlist from local fallback data.");
     if (localSongDatabase[language] && localSongDatabase[language][mood]) {
@@ -93,22 +99,29 @@ function loadFromFallback(language, mood) {
     state.currentMood = mood;
 }
 
+
+/**
+ * Fetches a playlist from YouTube based on language and mood.
+ * @param {string} language - The selected language (e.g., 'english', 'hindi').
+ * @param {string} mood - The selected mood (e.g., 'happy', 'sad').
+ */
 async function getPlaylist(language, mood) {
     const searchQuery = `${language} ${mood} songs playlist`;
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(searchQuery)}&type=video&key=${YOUTUBE_API_KEY}`;
 
-    if (YOUTUBE_API_KEY === 'YOUR_API_KEY_HERE' || !YOUTUBE_API_KEY) {
+    if (!YOUTUBE_API_KEY) {
         console.error("API Key is missing. Loading from fallback.");
         loadFromFallback(language, mood);
-        return;
+        return; // Exit the function early
     }
 
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
+            // If the error is specifically a 403 (Forbidden), it's likely a quota issue.
             if (response.status === 403) {
                 loadFromFallback(language, mood);
-                return;
+                return; // Exit and use fallback data
             }
             const errorData = await response.json();
             throw new Error(`YouTube API error! Status: ${response.status}. Message: ${errorData.error.message}`);
@@ -132,7 +145,7 @@ async function getPlaylist(language, mood) {
 
     } catch (error) {
         console.error("An error occurred fetching from YouTube. Using fallback.", error);
-        loadFromFallback(language, mood);
+        loadFromFallback(language, mood); // Use fallback on any other fetch-related error
     }
 }
 
