@@ -1,8 +1,9 @@
 // --- MODEL (model.js) ---
 // Manages the application's data by fetching from the YouTube API, with a local fallback.
 
-// The API key is now read from the Vercel environment variable.
-const YOUTUBE_API_KEY = import.meta.env.YOUR_API_KEY_HERE;
+// This safely checks for the Vercel environment variable.
+// If it doesn't exist (e.g., running locally), it defaults to null without crashing.
+const YOUTUBE_API_KEY = import.meta.env ? import.meta.env.VITE_YOUTUBE_API_KEY : null;
 
 const state = {
     currentMood: null,
@@ -11,7 +12,7 @@ const state = {
 };
 
 // --- Fallback Data ---
-// This local database is used if the YouTube API quota is exceeded.
+// This local database is used if the YouTube API is unavailable or the key is missing.
 const localSongDatabase = {
     english: {
         happy: [
@@ -106,14 +107,15 @@ function loadFromFallback(language, mood) {
  * @param {string} mood - The selected mood (e.g., 'happy', 'sad').
  */
 async function getPlaylist(language, mood) {
+    // If there's no API key (running locally), immediately use the fallback.
+    if (!YOUTUBE_API_KEY) {
+        console.error("API Key not found. Loading from local fallback.");
+        loadFromFallback(language, mood);
+        return; 
+    }
+
     const searchQuery = `${language} ${mood} songs playlist`;
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(searchQuery)}&type=video&key=${YOUTUBE_API_KEY}`;
-
-    if (!YOUTUBE_API_KEY) {
-        console.error("API Key is missing. Loading from fallback.");
-        loadFromFallback(language, mood);
-        return; // Exit the function early
-    }
 
     try {
         const response = await fetch(apiUrl);
