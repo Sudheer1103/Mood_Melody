@@ -75,9 +75,3 @@
 </html>
 ```
 
-### **What I Changed**
-
-* **Line 13:** Changed `href="style.css"` to `href="./style.css"`
-* **Line 69:** Changed `src="script.js"` to `src="./script.js"`
-
-Adding `./` before the file names makes the paths relative to the current directory, which is a much more reliable way to link files and resolves these common deployment issues. This single fix should get both your CSS and your JavaScript (including the offline songs) working correct
