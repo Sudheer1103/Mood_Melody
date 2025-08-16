@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Link to the stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Corrected Path: Using './' to specify the current directory -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -68,8 +68,16 @@
         </main>
     </div>
 
-    <!-- Main JavaScript entry point -->
-    <script type="module" src="script.js"></script>
+    <!-- Corrected Path: Using './' for the main script entry point -->
+    <script type="module" src="./script.js"></script>
 
 </body>
 </html>
+```
+
+### **What I Changed**
+
+* **Line 13:** Changed `href="style.css"` to `href="./style.css"`
+* **Line 69:** Changed `src="script.js"` to `src="./script.js"`
+
+Adding `./` before the file names makes the paths relative to the current directory, which is a much more reliable way to link files and resolves these common deployment issues. This single fix should get both your CSS and your JavaScript (including the offline songs) working correct

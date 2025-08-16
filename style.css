@@ -56,8 +56,7 @@ body::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* --- UPDATED DEFAULT IMAGE --- */
-    background-image: url('https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto-format&fit=crop');
     animation: kenburns-flow 30s ease-in-out infinite;
     transition: background-image 1s ease-in-out;
 }
@@ -96,14 +95,13 @@ body.workout-bg {
     --accent-color: #ff4b2b;
 }
 
-/* --- ALL IMAGE LINKS BELOW HAVE BEEN REPLACED WITH NEW, RELIABLE ONES --- */
-/* --- UPDATED HAPPY, SAD, AND CHILL IMAGES --- */
+/* Unique background images */
 body.happy-bg::before { background-image: url('https://images.unsplash.com/photo-1509909756405-be0199881695?q=80&w=2070&auto-format&fit=crop'); }
 body.sad-bg::before { background-image: url('https://images.unsplash.com/photo-1534278931739-31a839a35b1e?q=80&w=1974&auto-format&fit=crop'); }
+body.romantic-bg::before { background-image: url('https://images.unsplash.com/photo-1515876483109-TR03739556a9?q=80&w=1974&auto-format&fit=crop'); }
+body.energetic-bg::before { background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?q=80&w=2070&auto-format&fit=crop'); }
 body.chill-bg::before { background-image: url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?q=80&w=2070&auto-format&fit=crop'); }
-body.romantic-bg::before { background-image: url('https://images.pexels.com/photos/1024984/pexels-photo-1024984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
-body.energetic-bg::before { background-image: url('https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
-body.workout-bg::before { background-image: url('https://images.pexels.com/photos/2261477/pexels-photo-2261477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); }
+body.workout-bg::before { background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2070&auto-format&fit=crop'); }
 
 /* 4. Main Layout & Header
 -------------------------------------------------- */
@@ -156,6 +154,12 @@ body.workout-bg::before { background-image: url('https://images.pexels.com/photo
 
 .language-select:hover {
     border-color: var(--accent-color);
+}
+
+/* --- FIX: Added styles for dropdown options --- */
+.language-select option {
+    background-color: #1e1e1e; /* Dark background for options */
+    color: #ffffff; /* White text for options */
 }
 
 /* 6. Mood Selector Cards
